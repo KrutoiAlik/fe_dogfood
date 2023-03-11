@@ -1,0 +1,40 @@
+footer {
+    padding: 40px 0;
+    background-color: #FFE44D;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer__links {
+    font-family: "Nunito", "Arial", "Helvetica", sans-serif;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    line-height: 14px;
+    font-size: 12px;
+    gap: 19px;
+}
+
+.footer__contacts {
+    font-family: "Nunito", "Arial", "Helvetica", sans-serif;
+}
+
+.footer__contacts .footer__contacts-title,
+.footer__contacts .footer__contacts-phone {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.footer__contacts-title {
+    margin-bottom: 16px;
+}
+
+.footer__contacts .footer__email {
+    font-size: 12px;
+    line-height: 14px;
+}

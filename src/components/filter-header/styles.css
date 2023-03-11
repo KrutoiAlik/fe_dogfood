@@ -1,0 +1,15 @@
+.filter {
+    margin-bottom: 20px;
+}
+
+.filter__message {
+    font-family: 'Nunito', sans-serif;
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 300;
+}
+
+.search__value {
+    text-transform: capitalize;
+    font-weight: bold;
+}
