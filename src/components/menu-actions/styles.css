@@ -8,3 +8,53 @@
 .menu svg {
     cursor: pointer;
 }
+
+.menu__action {
+    position: relative;
+}
+
+.profile__popup {
+    height: 80px;
+    position: absolute;
+    background: white;
+    top: 40px;
+    right: -220px;
+    width: 350px;
+    z-index: 1;
+    border-radius: 10px;
+    border: 2px solid #e5e5e5;
+    padding: 15px;
+    opacity: 0;
+}
+
+.profile__popup:before {
+    content: "";
+    width: 20px;
+    position: absolute;
+    background: white;
+    top: -11px;
+    left: 105px;
+    border: 2px solid #e5e5e5;
+    border-bottom: none;
+    height: 20px;
+    transform: rotate(45deg);
+    border-right: none;
+}
+
+.profile__popup.popup__active {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    opacity: 1;
+    transition: opacity, 0.3s;
+}
+
+.profile__name {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.profile__email {
+    font-size: 14px;
+    color: #757575;
+}

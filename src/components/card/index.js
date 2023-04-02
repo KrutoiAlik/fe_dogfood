@@ -1,27 +1,47 @@
+import { useContext, useState } from 'react';
+import cn from 'classnames';
+
 import './styles.css';
-import {ReactComponent as FavoriteIcon} from './assets/ic-favorites.svg';
+import { ReactComponent as FavoriteIcon } from './assets/ic-favorites.svg';
+import { ReactComponent as FavoriteIconLiked } from './assets/ic-favorites-liked.svg';
+import { UserContext } from '../../contexts/user-content';
+import { productService } from '../../services/product-service';
 
 export const Card = ({
+  _id,
   name,
   price,
   discount,
   weight,
-  picture
+  pictures,
+  likes,
 }) => {
 
+  const currentUser = useContext(UserContext);
   const discountedPrice = discount !== 0 ? price * (1 - discount / 100) : 0;
+
+  const [isFavorite, setFavorite] = useState(currentUser?._id ? likes.includes(currentUser._id) : false);
+
+  const handleClick = () => {
+    if(isFavorite){
+      productService.removeLike(_id).then(() => setFavorite(false));
+    } else {
+      productService.addLike(_id).then(() => setFavorite(true));
+    }
+  };
 
   return <div className={'card'}>
     <div className={'card__sticky card__sticky_type_top-left'}>
       {discount !== 0 && <span className={'card__discount'}>{`-${discount}%`}</span>}
     </div>
     <div className={'card__sticky card__sticky_type_top-right'}>
-      <button className={'card__favorite'}>
-        <FavoriteIcon/>
+      <button className={cn('card__favorite', { 'card__favorite-liked': isFavorite })}
+              onClick={handleClick}>
+        {isFavorite ? <FavoriteIconLiked/> : <FavoriteIcon/>}
       </button>
     </div>
     <a href="#" className={'card__link'}>
-      <img className={'card__image'} src={picture} alt={name}/>
+      <img className={'card__image'} src={pictures} alt={name}/>
       <div className="card__desc">
         {discount !== 0
           ? (

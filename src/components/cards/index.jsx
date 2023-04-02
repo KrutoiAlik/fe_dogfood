@@ -4,7 +4,7 @@ import './styles.css';
 export const Cards = ({ data }) => {
 
   const getCards = () => {
-    return data.map((record, index) => <Card key={index} {...record} />);
+    return data?.map((record, index) => <Card key={index} {...record} />);
   };
 
   return <>
