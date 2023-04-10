@@ -1,0 +1,23 @@
+.vendor-code {
+    font-family: "Nunito", sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #1A1A1A;
+}
+
+.vendor-code__sub-header {
+    color: #7B8E98;
+}
+
+.product__details section {
+    margin: 40px 0;
+}
+
+.product__details h2 {
+    margin-bottom: 20px;
+}
+
+.product__img {
+    max-width: 488px;
+    max-height: 488px;
+}

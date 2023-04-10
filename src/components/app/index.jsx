@@ -1,15 +1,19 @@
 import { Header } from '../header';
 import { Logo } from '../logo';
 import { Search } from '../search';
-import { Cards } from '../cards';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Footer } from '../footer';
-import { FilterHeader } from '../filter-header';
 import { MenuActions } from '../menu-actions';
 import { productService } from '../../services/product-service';
 import { useDebounce } from '../../hooks/debounce';
 import { userService } from '../../services/user-service';
 import { UserContext } from '../../contexts/user-content';
+import { ProductsContext } from '../../contexts/products-context';
+import { Route, Routes } from 'react-router-dom';
+import { SearchContext } from '../../contexts/search-context';
+import { CatalogPage } from '../../pages/catalog';
+import { ProductPage } from '../../pages/product';
+import { NotFoundPage } from '../../pages/not-found';
 
 function App() {
 
@@ -17,7 +21,7 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
   const [userInfo, setUserInfo] = useState(null);
 
-  const debouncedValue = useDebounce(searchValue.toLowerCase(), 300);
+  const debouncedSearchValue = useDebounce(searchValue.toLowerCase(), 300);
 
   const handleSearchChange = (value) => {
     setSearchValue(value);
@@ -30,7 +34,7 @@ function App() {
 
   function filterProducts() {
     productService
-      .filterByQuery(debouncedValue)
+      .filterByQuery(debouncedSearchValue)
       .then(data => {
         setProducts(data);
       });
@@ -48,21 +52,34 @@ function App() {
   useEffect(() => {
     setProducts([]);
     filterProducts();
-  }, [debouncedValue]);
+  }, [debouncedSearchValue]);
 
   return (
     <>
       <UserContext.Provider value={userInfo}>
-        <Header>
-          <Logo/>
-          <Search value={searchValue} handleChange={handleSearchChange} handleSubmit={handleSearchSubmit}/>
-          <MenuActions/>
-        </Header>
-        <main className="content container">
-          {debouncedValue && <FilterHeader searchValue={debouncedValue} numberOfRecords={products.length}/>}
-          {userInfo && <Cards data={products}/>}
-        </main>
-        <Footer/>
+        <SearchContext.Provider value={debouncedSearchValue}>
+          <ProductsContext.Provider value={products}>
+            <Header>
+              <Routes>
+                <Route path="*" element={
+                  <>
+                    <Logo href="/"/>
+                    <Search value={searchValue} handleChange={handleSearchChange} handleSubmit={handleSearchSubmit}/>
+                    <MenuActions/>
+                  </>
+                }/>
+              </Routes>
+            </Header>
+            <main className="content container">
+              <Routes>
+                <Route path="/" element={<CatalogPage/>}/>
+                <Route path="/product/:id" element={<ProductPage/>}/>
+                <Route path="*" element={<NotFoundPage/>}/>
+              </Routes>
+            </main>
+            <Footer/>
+          </ProductsContext.Provider>
+        </SearchContext.Provider>
       </UserContext.Provider>
     </>
   );
