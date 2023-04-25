@@ -1,0 +1,45 @@
+.title {
+    font-family: 'Nunito', 'sans-serif';
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 32px;
+    color: #1A1A1A;
+}
+
+.divider {
+    border: 1px solid #ECEFF1;
+    margin: 20px 0 46px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__element {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    gap: 40px;
+    margin: 40px 0;
+    width: 100%;
+}
+
+.textarea {
+    width: 100%;
+    height: 88px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border-color: #CFD8DC;
+}
+
+.submit-btn {
+    cursor: pointer;
+    font-family: "Nunito", sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 20px;
+    background: #FFE44D;
+    border-radius: 55px;
+    border: none;
+    padding: 14px 24px;
+}

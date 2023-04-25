@@ -64,8 +64,13 @@ class ProductService extends Service {
     return fetch(`${this.endpoint}/review`, { headers: this.headers }).then(this._handleResponse);
   }
 
-  getReviewsByProductId(id) {
-    return fetch(`${this.endpoint}/review/${id}`, { headers: this.headers }).then(this._handleResponse);
+  addReviewForProduct(id, review) {
+    const options = {
+      headers: this.headers,
+      method: 'POST',
+      body: JSON.stringify(review)
+    };
+    return fetch(`${this.endpoint}/review/${id}`, options).then(this._handleResponse);
   }
 }
 

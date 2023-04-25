@@ -3,6 +3,7 @@ import './styles.css';
 import { useContext } from 'react';
 import { ProductsContext } from '../../contexts/products-context';
 import { BreadCrumbs } from '../../components/navigate';
+import { ProductReviews } from '../../components/product-reviews';
 
 export const ProductPage = () => {
 
@@ -28,9 +29,7 @@ export const ProductPage = () => {
       <section className="product__properties">
         <h2>Характеристики</h2>
       </section>
-      <div className="product__reviews">
-        <h2>Отзывы</h2>
-      </div>
+      <ProductReviews product={product}/>
     </div>
   </>;
 };
